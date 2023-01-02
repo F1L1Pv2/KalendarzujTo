@@ -21,5 +21,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Ustawienie minimum i maksimum daty
+        val calendarView = findViewById<CalendarView>(R.id.calendarView)
+
+        calendarView.visibility = View.INVISIBLE
+
+        val twoYearsFromNow = Calendar.getInstance().apply { add(Calendar.YEAR, 2) }
+        calendarView.minDate = Calendar.getInstance().timeInMillis
+        calendarView.maxDate = twoYearsFromNow.timeInMillis
     }
 }
