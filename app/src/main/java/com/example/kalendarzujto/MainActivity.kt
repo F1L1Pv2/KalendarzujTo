@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     private var startDate: Calendar = Calendar.getInstance()
     private var endDate: Calendar = Calendar.getInstance()
 
+
     private var tripLength: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +40,21 @@ class MainActivity : AppCompatActivity() {
                 startDate.set(year, month, dayOfMonth)
                 calendarView.visibility = View.GONE
 
+                tripLength = calculateTripLength()
+                val tripLengthTextView = findViewById<TextView>(R.id.tripLengthTextView)
+                tripLengthTextView.text = "$tripLength dni"
+            }
+        }
+
+        val endDateButton = findViewById<Button>(R.id.endDateButton)
+        endDateButton.setOnClickListener {
+
+            calendarView.visibility = View.VISIBLE
+            calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+
+                endDate.set(year, month, dayOfMonth)
+                calendarView.visibility = View.GONE
+
 
                 tripLength = calculateTripLength()
                 val tripLengthTextView = findViewById<TextView>(R.id.tripLengthTextView)
@@ -48,4 +64,4 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-//todo zrobienie funkcji obliczającej długość podróży
+//todo zrobienie funkcji obliczajacej dlugosc podrozy
