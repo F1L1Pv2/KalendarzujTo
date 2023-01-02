@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
+
     private var startDate: Calendar = Calendar.getInstance()
     private var endDate: Calendar = Calendar.getInstance()
 
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
 
         val calendarView = findViewById<CalendarView>(R.id.calendarView)
@@ -40,11 +42,13 @@ class MainActivity : AppCompatActivity() {
                 startDate.set(year, month, dayOfMonth)
                 calendarView.visibility = View.GONE
 
+
                 tripLength = calculateTripLength()
                 val tripLengthTextView = findViewById<TextView>(R.id.tripLengthTextView)
                 tripLengthTextView.text = "$tripLength dni"
             }
         }
+
 
         val endDateButton = findViewById<Button>(R.id.endDateButton)
         endDateButton.setOnClickListener {
@@ -62,6 +66,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-}
 
-//todo zrobienie funkcji obliczajacej dlugosc podrozy
+    private fun calculateTripLength(): Long {
+
+        val tripLengthInMilliseconds = endDate.timeInMillis - startDate.timeInMillis
+
+
+        return TimeUnit.MILLISECONDS.toDays(tripLengthInMilliseconds)
+    }
+}
